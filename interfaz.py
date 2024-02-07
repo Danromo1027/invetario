@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from time import strftime
 import pandas as pd
-
+#pan
 
 from Conexion import *
 
