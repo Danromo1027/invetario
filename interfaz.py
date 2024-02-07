@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from time import strftime
 import pandas as pd
-#hola mundo
+#pan
 
 from Conexion import *
 
@@ -18,6 +18,7 @@ class FormularioAlmacen():
     global buscarCod
     buscarCod = None
     
+
     global nombre_buscado
     nombre_buscado = None
     
@@ -29,7 +30,7 @@ class FormularioAlmacen():
     
     global buscarMat 
     buscarMat = None
-
+    
 def Formulario():
         
     global frame1,tree,buscarCod,buscarMat,nombre_buscado,nombre_material
