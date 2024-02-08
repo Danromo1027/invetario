@@ -50,27 +50,6 @@ class Alma:
             
         except mysql.connector.Error as error:
             print("Error de ingreso de datos {}".format(error))
-    
-    def modificarClientes():
-        
-        try:
-            
-            cone = Conexion.ConexionBaseDeDatos()
-            cursor = cone.cursor()
-            sql = "UPDATE usuarios SET usuarios.Ing1 = %s, usuarios.Ing2 = %s, usuarios.Ing3 = %s, usuarios.Almacen = %s, usuarios.Total = %s where usuarios.id = %s;"
-           
-            valores = (nombres, apellidos, sexo, idUsuarios,)
-            
-            
-            cursor.execute(sql,valores)
-            
-            #Ejecucion de la funcion
-            cone.commit()
-            print(cursor.rowcount, "registro actualizado")
-        
-        except mysql.connector.Error as error:
-            print("Error al actualizar datos {}".format(error))
-
 
     def busca_producto(nombre_producto):
         

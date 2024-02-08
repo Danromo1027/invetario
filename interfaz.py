@@ -43,9 +43,9 @@ def Formulario():
         frame1 = LabelFrame(ventana,text="Inventario - Almacen",padx=10,pady=10)
         frame1.pack(side="left", anchor='n',padx=10, pady=10, fill='both', expand=True)
         frame1.config(width=5,height=5)
-        frame3 = LabelFrame(ventana,text="TABLA",padx=10,pady=10)
-        frame3.pack(side=RIGHT, anchor='n', fill='both', expand=True)
-        frame3.config(width=5, height=10)
+        frame2 = LabelFrame(ventana,text="TABLA",padx=10,pady=10)
+        frame2.pack(side=RIGHT, anchor='n', fill='both', expand=True,padx=10,pady=10)
+        frame2.config(width=5, height=10)
         
         #METODO BUSCAR
         buscarCod = StringVar()
@@ -66,10 +66,10 @@ def Formulario():
         reserva = StringVar()
         cantidad = StringVar()
         
-        f1 = Entry(frame1,width=15,textvariable=Cod1).grid(row=2,column=1,padx=10,pady=10)
-        f2 = Entry(frame1,width=15,textvariable=sipro).grid(row=3,column=1,padx=10,pady=10)
-        f3 = Entry(frame1,width=15,textvariable=reserva).grid(row=4,column=1,padx=10,pady=10)
-        f4 = Entry(frame1,width=15,textvariable=cantidad).grid(row=5,column=1,padx=10,pady=10)
+        Entry(frame1,width=15,textvariable=Cod1).grid(row=2,column=1,padx=10,pady=10)
+        Entry(frame1,width=15,textvariable=sipro).grid(row=3,column=1,padx=10,pady=10)
+        Entry(frame1,width=15,textvariable=reserva).grid(row=4,column=1,padx=10,pady=10)
+        Entry(frame1,width=15,textvariable=cantidad).grid(row=5,column=1,padx=10,pady=10)
         
         #Combobox para asignar material a un ing o almacen
         AsignarMateriales = tk.StringVar()
@@ -80,7 +80,7 @@ def Formulario():
         Button(frame1, text="Agregar",width=15, command = agregarCantidad).grid(row=7,columnspan=2)
         
         #TABLA DE DATOS
-        tree = ttk.Treeview(frame3,columns=("CODIGO MATERIAL","MATERIAL - DESCRIPCION","GRUPO","INGENIERO 1",
+        tree = ttk.Treeview(frame2,columns=("CODIGO MATERIAL","MATERIAL - DESCRIPCION","GRUPO","INGENIERO 1",
                                                     "INGENIERO 2","INGENIERO 3","ALMACEN","TOTAL","UNIDADES DE MEDIDA"),show='headings',height=10)
         
         tree.column("# 1",anchor=CENTER, width=100)
@@ -106,10 +106,12 @@ def Formulario():
         for row in Alma.mostrar_productos():
             tree.insert("","end",values=row)
         
-        tree.grid(row=1,rowspan=50,column=0, sticky=tk.NE)
+        tree.grid(row=2,rowspan=50,column=0, sticky=tk.NE,padx=5,pady=10)
         
         #Boton para refrescar la tabla de datos
-        Button(frame3, text="Refrescar",width=15,command=actualizarTreeView).grid(row=0,column=0)
+        Button(frame2, text="Refrescar",width=15,command=actualizarTreeView).grid(row=1,column=0,pady=5)
+        Button(frame2, text="Inventario", width=15).grid(row=0,column=0,pady=5)
+        
         
         ventana.mainloop()
         
@@ -181,7 +183,6 @@ def agregarCantidad():
             
             Alma.ingresarCantidad(fren,canti,codMat)
             messagebox.showinfo("Informacion", "Los datos fueron guardados")
-
 
             actualizarTreeView()
             
