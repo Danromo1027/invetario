@@ -20,7 +20,7 @@ class Alma:
             except mysql.connector.Error as error:
                 print("Error de muestra de datos {}".format(error))
                 
-    def ingresarCantidad(canti):
+    def ingresarCantidad(canti,codMat):
         
         try:
             
@@ -28,14 +28,17 @@ class Alma:
             cursor = cone.cursor()
             
             if canti.get()=="Ingeniero 1":
-                sql = "insert into usuarios values(null,null,null,%s,%s,%s,%s,%s,null);"
-                valores = (canti,)
+                sql = "Update usuarios SET Ing1 = %s WHERE Codigo_Mat = %s"
+                valores = (canti,codMat,)
             if canti.get()=="Ingeniero 2":
-                sql = "insert into usuarios values(null,null,null,%s,%s,%s,%s,%s,null);"
-                valores = (canti,)
+                sql = "Update usuarios SET Ing2 = %s WHERE Codigo_Mat = %s"
+                valores = (canti,codMat,)
             if canti.get()=="Ingeniero 3":
-                sql = "insert into usuarios values(null,null,null,%s,%s,%s,%s,%s,null);"
-                valores = (canti,)
+                sql = "Update usuarios SET Ing3 = %s WHERE Codigo_Mat = %s"
+                valores = (canti,codMat,)
+            if canti.get()=="Almacen":
+                sql = "Update usuarios SET Almacen = %s WHERE Codigo_Mat = %s"
+                valores = (canti,codMat,)
 
             cursor.execute(sql,valores)
             cone.commit()

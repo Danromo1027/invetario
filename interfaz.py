@@ -75,7 +75,7 @@ def Formulario():
         Asigna.grid(row=6,column=1,padx=5,pady=5)
         AsignarMateriales.set("Asigne mat. a una persona")
         
-        Button(frame1, text="Agregar",width=15).grid(row=7,columnspan=2)
+        Button(frame1, text="Agregar",width=15, command = agregarCantidad).grid(row=7,columnspan=2)
         
         #TABLA DE DATOS
         tree = ttk.Treeview(frame3,columns=("CODIGO MATERIAL","MATERIAL - DESCRIPCION","GRUPO","INGENIERO 1",
@@ -162,7 +162,7 @@ def actualizarTreeView():
     except ValueError as error:
         print("Error al actualizar tabla {}".format(error))
 
-def guardarRegistros():
+def agregarCantidad():
         
         global tree,refrescar,Cod1,reserva,sipro,cantidad,Asigna,asigna,reser,codMat,sipro1,canti
         
@@ -178,18 +178,15 @@ def guardarRegistros():
             asigna = asigna.get()
             
                 #Llamamos la clase y la funcion de clientes para asignar los valores de cada variable a la tabla
-            CClientes.ingresarClientes(nombres,apellidos,sexo)
-            
-             #Por medio del messagebox emitimos un cuadro de notificacion respecto al estado de los datos
-             #(titulo del cuadro de dialogo - texto informativo)
+            Alma.ingresarCantidad(canti,codMat)
             messagebox.showinfo("Informacion", "Los datos fueron guardados")
-            
-                #Llamamos la funcion para actualizar
+
             actualizarTreeView()
             
                 #Limpiamos los campos
-            textBoxNombres.delete(0,END)
-            textBoxApellidos.delete(0,END)
+            cantidad.delete(0,END)
+            Cod1.delete(0,END)
+            
         except ValueError as error:
             print("Error al ingresar los datos {}".format(error))
 
