@@ -28,17 +28,21 @@ class Alma:
             cursor = cone.cursor()
             
             if fren == "Ingeniero 1":
-                sql = "Update usuarios SET Ing1 = %s WHERE Codigo_Mat = %s"
+                sql = "Update usuarios SET Ing1 = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
                 valores = (canti,codMat,)
+                
             if fren =="Ingeniero 2":
-                sql = "Update usuarios SET Ing2 = %s WHERE Codigo_Mat = %s"
+                sql = "Update usuarios SET Ing2 = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
                 valores = (canti,codMat,)
+                
             if fren =="Ingeniero 3":
-                sql = "Update usuarios SET Ing3 = %s WHERE Codigo_Mat = %s"
+                sql = "Update usuarios SET Ing3 = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
                 valores = (canti,codMat,)
+                
             if fren =="Almacen":
-                sql = "Update usuarios SET Almacen = %s WHERE Codigo_Mat = %s"
+                sql = "Update usuarios SET Almacen = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
                 valores = (canti,codMat,)
+                
 
             cursor.execute(sql,valores)
             cone.commit()

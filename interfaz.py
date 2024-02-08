@@ -32,7 +32,7 @@ class FormularioAlmacen():
 
 def Formulario():
         
-    global frame1,tree,buscarCod,buscarMat,nombre_buscado,refrescar,Cod1,reserva,sipro,cantidad,fren,Asigna
+    global frame1,tree,buscarCod,buscarMat,nombre_buscado,refrescar,Cod1,reserva,sipro,cantidad,fren,Asigna,f1,f2,f3,f4
         
     try:
         
@@ -66,10 +66,10 @@ def Formulario():
         reserva = StringVar()
         cantidad = StringVar()
         
-        Entry(frame1,width=15,textvariable=Cod1).grid(row=2,column=1,padx=10,pady=10)
-        Entry(frame1,width=15,textvariable=sipro).grid(row=3,column=1,padx=10,pady=10)
-        Entry(frame1,width=15,textvariable=reserva).grid(row=4,column=1,padx=10,pady=10)
-        Entry(frame1,width=15,textvariable=cantidad).grid(row=5,column=1,padx=10,pady=10)
+        f1 = Entry(frame1,width=15,textvariable=Cod1).grid(row=2,column=1,padx=10,pady=10)
+        f2 = Entry(frame1,width=15,textvariable=sipro).grid(row=3,column=1,padx=10,pady=10)
+        f3 = Entry(frame1,width=15,textvariable=reserva).grid(row=4,column=1,padx=10,pady=10)
+        f4 = Entry(frame1,width=15,textvariable=cantidad).grid(row=5,column=1,padx=10,pady=10)
         
         #Combobox para asignar material a un ing o almacen
         AsignarMateriales = tk.StringVar()
@@ -165,7 +165,7 @@ def actualizarTreeView():
 
 def agregarCantidad():
         
-        global tree,refrescar,Cod1,reserva,sipro,cantidad,Asigna,fren,reser,codMat,sipro1,canti
+        global tree,refrescar,Cod1,reserva,sipro,cantidad,Asigna,fren,reser,codMat,sipro1,canti,f1,f2,f3,f4
         
         try:
             if Cod1 is None or reserva is None or Asigna is None or cantidad is None or sipro is None:
@@ -182,44 +182,16 @@ def agregarCantidad():
             Alma.ingresarCantidad(fren,canti,codMat)
             messagebox.showinfo("Informacion", "Los datos fueron guardados")
 
+
             actualizarTreeView()
             
-                #Limpiamos los campos
-            cantidad.delete(0,END)
-            Cod1.delete(0,END)
+            #Limpiamos los campos
+            canti.delete(0,END)
+            codMat.delete(0,END)
+            reser.delete(0,END)
+            sipro1.delete(0,END)
+            fren.delete(0,END)
             
-        except ValueError as error:
-            print("Error al ingresar los datos {}".format(error))
-
-def modificarRegistros():
-
-        global tree,refrescar,Cod1,reserva,sipro,cantidad,Asigna
-        
-        try:
-            
-                #verificar si los widgets (Editext) estan inicializados (contienen la informacion a registrar)
-            if textBoxId is None or textBoxNombres is None or textBoxApellidos is None or combo is None:
-                print("Los widgets no estan inicializados")
-                return
-            
-            idUsuario = textBoxId.get()
-            nombres = textBoxNombres.get()
-            apellidos = textBoxApellidos.get()
-            sexo = combo.get()
-            
-                #Llamamos la clase y la funcion de clientes para asignar los valores de cada variable a la tabla
-            CClientes.modificarClientes(idUsuario,nombres,apellidos,sexo)
-            
-                #Por medio del messagebox emitimos un cuadro de notificacion respecto al estado de los datos
-                #(titulo del cuadro de dialogo - texto informativo)
-            messagebox.showinfo("Informacion", "Los datos fueron actualizados")
-            
-            actualizarTreeView()
-            
-                #Limpiamos los campos
-            textBoxId.delete(0,END)
-            textBoxNombres.delete(0,END)
-            textBoxApellidos.delete(0,END)
         except ValueError as error:
             print("Error al ingresar los datos {}".format(error))
 
