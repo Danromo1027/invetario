@@ -27,12 +27,15 @@ class FormularioAlmacen():
     sipro = None
     global cantidad
     cantidad = None
+    global Asigna
+    Asigna = None
 
 def Formulario():
         
-    global frame1,tree,buscarCod,buscarMat,nombre_buscado,refrescar,Cod1,reserva,sipro,cantidad
+    global frame1,tree,buscarCod,buscarMat,nombre_buscado,refrescar,Cod1,reserva,sipro,cantidad,fren,Asigna
         
     try:
+        
         ventana = Tk()
         ventana.geometry("1200x800")
         ventana.title("REGISTRO DE ALMACEN")
@@ -67,7 +70,6 @@ def Formulario():
         Entry(frame1,width=15,textvariable=sipro).grid(row=3,column=1,padx=10,pady=10)
         Entry(frame1,width=15,textvariable=reserva).grid(row=4,column=1,padx=10,pady=10)
         Entry(frame1,width=15,textvariable=cantidad).grid(row=5,column=1,padx=10,pady=10)
-        
         
         #Combobox para asignar material a un ing o almacen
         AsignarMateriales = tk.StringVar()
@@ -114,7 +116,6 @@ def Formulario():
     except ValueError as error:
         print("Error al mostrar la interfaz, error: {}".format(error))
 
-
 def buscar_nombre():
         global nombre_producto, nombre_buscado,buscarCod,tree,dato,refrescar,Cod1,reserva,sipro,cantidad
         try:
@@ -128,7 +129,7 @@ def buscar_nombre():
 
             tree.delete(*tree.get_children())
             i = -1
-            
+
             for dato in nombre_buscado:
                 i= i+1                       
                 tree.insert('',i, text = nombre_buscado[i][1:1], values=nombre_buscado[i][0:9])
@@ -164,7 +165,7 @@ def actualizarTreeView():
 
 def agregarCantidad():
         
-        global tree,refrescar,Cod1,reserva,sipro,cantidad,Asigna,asigna,reser,codMat,sipro1,canti
+        global tree,refrescar,Cod1,reserva,sipro,cantidad,Asigna,fren,reser,codMat,sipro1,canti
         
         try:
             if Cod1 is None or reserva is None or Asigna is None or cantidad is None or sipro is None:
@@ -175,10 +176,10 @@ def agregarCantidad():
             reser = reserva.get()
             sipro1 = sipro.get()
             canti = cantidad.get()
-            asigna = asigna.get()
+            fren = Asigna.get()
+            fren = str(fren)
             
-                #Llamamos la clase y la funcion de clientes para asignar los valores de cada variable a la tabla
-            Alma.ingresarCantidad(canti,codMat)
+            Alma.ingresarCantidad(fren,canti,codMat)
             messagebox.showinfo("Informacion", "Los datos fueron guardados")
 
             actualizarTreeView()
@@ -190,9 +191,8 @@ def agregarCantidad():
         except ValueError as error:
             print("Error al ingresar los datos {}".format(error))
 
-
 def modificarRegistros():
-        
+
         global tree,refrescar,Cod1,reserva,sipro,cantidad,Asigna
         
         try:
@@ -223,5 +223,4 @@ def modificarRegistros():
         except ValueError as error:
             print("Error al ingresar los datos {}".format(error))
 
-      
 Formulario()

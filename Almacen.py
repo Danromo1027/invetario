@@ -20,23 +20,23 @@ class Alma:
             except mysql.connector.Error as error:
                 print("Error de muestra de datos {}".format(error))
                 
-    def ingresarCantidad(canti,codMat):
+    def ingresarCantidad(fren,canti,codMat):
         
         try:
             
-            cone = Conexion.ConexionBaseDeDatos()
+            cone = Conexion.ConexionBaseDatos()
             cursor = cone.cursor()
             
-            if canti.get()=="Ingeniero 1":
+            if fren == "Ingeniero 1":
                 sql = "Update usuarios SET Ing1 = %s WHERE Codigo_Mat = %s"
                 valores = (canti,codMat,)
-            if canti.get()=="Ingeniero 2":
+            if fren =="Ingeniero 2":
                 sql = "Update usuarios SET Ing2 = %s WHERE Codigo_Mat = %s"
                 valores = (canti,codMat,)
-            if canti.get()=="Ingeniero 3":
+            if fren =="Ingeniero 3":
                 sql = "Update usuarios SET Ing3 = %s WHERE Codigo_Mat = %s"
                 valores = (canti,codMat,)
-            if canti.get()=="Almacen":
+            if fren =="Almacen":
                 sql = "Update usuarios SET Almacen = %s WHERE Codigo_Mat = %s"
                 valores = (canti,codMat,)
 
