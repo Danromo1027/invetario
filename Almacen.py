@@ -61,7 +61,7 @@ class Alma:
             
             if fren == "Ingeniero 1":
                 sql2 = "SELECT Ing1 FROM usuarios WHERE Codigo_Mat = %s"
-                cursor.execute(sql, (codigo_mat,))
+                cursor.execute(sql2, (codMat,))
 
                 cantidadIng_1 = cursor.fetchone() 
 
