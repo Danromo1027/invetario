@@ -1,13 +1,14 @@
 import pandas as pd
-
+import sqlite3
+from openpyxl import Workbook
 from Conexion import *
 
 
-cone = Conexion.ConexionBaseDatos()
-query = "SELECT * FROM usuario;"
-df = pd.read_sql(cone,query)
-df.to_excel('C:/Users/diosc/OneDrive/Documentos/PROYECTOS_DE_PROGRAMACION/Forma.xlsx', index=False)
-cone.commit()
-cone.close()
+#cone = Conexion.ConexionBaseDatos()
+#query = "SELECT * FROM usuarios"
+#df = pd.read_sql(query,cone)
+#df.to_excel('Forma.xlsx', index=False)
+#cone.commit()
+#cone.close()
         
     

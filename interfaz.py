@@ -5,9 +5,7 @@ from tkinter import messagebox
 from time import strftime
 from Excel import *
 import pandas as pd
-
 from Conexion import *
-
 from Almacen import *
 
 class FormularioAlmacen():
@@ -114,7 +112,10 @@ def Formulario():
         
         #Boton para refrescar la tabla de datos
         Button(frame2, text="Refrescar",width=15,command=actualizarTreeView).grid(row=1,column=0,pady=5)
-        Button(frame2, text="Inventario", width=15).grid(row=0,column=0,pady=5)
+        
+        #Boton para hacer el inventario
+        
+        Button(frame2, text="Inventario", command=funcionInventario,width=15).grid(row=0,column=0,pady=5)
         
         
         ventana.mainloop()
@@ -234,5 +235,16 @@ def retirarLaCantidad():
         except ValueError as error:
             print("Error al ingresar los datos {}".format(error))
 
+def funcionInventario():
+    global nombre_producto, nombre_buscado,buscarCod,tree,refrescar,Cod1,reserva,sipro,cantidad,Asigna,asigna,reser,canti,codMat,sipro1
+    
+    tree.delete(*tree.get_children())
+    registro = Alma.Inventario()
+    i = -1
+    for dato in registro:
+        i= i+1                       
+        tree.insert('',i, text = registro[i][1:2], values=registro[i][0:9])
+        
+    
 
 Formulario()

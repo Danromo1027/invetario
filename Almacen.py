@@ -99,10 +99,29 @@ class Alma:
             nombreX = cursor.fetchall()
             cone.commit()
             cone.close()
-            print(nombre_producto+"almacen sin codigo")
+        
             return nombreX 
         
         except mysql.connector.Error as error:
             print("Error de busqueda de datos {}".format(error))
+            return []     
+    
+    def Inventario():
+        
+        try:
+            
+            cone = Conexion.ConexionBaseDatos()
+            if cone is None:
+                    return ["NO"]
+            cursor = cone.cursor()
+            sql = "SELECT * FROM usuarios WHERE Total > 0"
+            cursor.execute(sql)
+            nombreX = cursor.fetchall()
+            cone.commit()
+            cone.close()
+            return nombreX 
+        
+        except mysql.connector.Error as error:
+            print("Error de proyeccion del inventario {}".format(error))
             return []     
     
