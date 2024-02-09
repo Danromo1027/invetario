@@ -1,1 +1,0 @@
-SELECT * FROM suministros.usuarios;
