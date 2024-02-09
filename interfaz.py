@@ -181,10 +181,6 @@ def agregarCantidad():
             canti = cantidad.get()
             fren = Asigna.get()
             fren = str(fren)
-            i = 0
-            
-            for i in canti:
-                b = i + canti
             
             Alma.ingresarCantidad(fren,canti,codMat)
             messagebox.showinfo("Informacion", "Los datos fueron guardados")
