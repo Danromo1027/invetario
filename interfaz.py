@@ -224,7 +224,6 @@ def retirarLaCantidad():
 
             actualizarTreeView()
             
-            
             #Limpiamos los campos
             canti.delete(0,END)
             codMat.delete(0,END)
