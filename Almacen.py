@@ -2,6 +2,10 @@ from Conexion import *
 from tkinter import messagebox
 
 
+<<<<<<< HEAD
+=======
+#hola jimmy s ay
+>>>>>>> c097d0180769bbf68ef87f1b81cf49d1f19b433f
 class Alma:
     
     def mostrar_productos():
