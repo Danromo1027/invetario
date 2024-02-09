@@ -51,6 +51,40 @@ class Alma:
         except mysql.connector.Error as error:
             print("Error de ingreso de datos {}".format(error))
 
+
+    def RetirarCantidad(fren,canti,codMat):
+        
+        try:
+            
+            cone = Conexion.ConexionBaseDatos()
+            cursor = cone.cursor()
+            
+            if fren == "Ingeniero 1":
+                sql = "Update usuarios SET Ing1 = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
+                valores = (canti,codMat,)
+                
+            if fren =="Ingeniero 2":
+                sql = "Update usuarios SET Ing2 = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
+                valores = (canti,codMat,)
+                
+            if fren =="Ingeniero 3":
+                sql = "Update usuarios SET Ing3 = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
+                valores = (canti,codMat,)
+                
+            if fren =="Almacen":
+                sql = "Update usuarios SET Almacen = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
+                valores = (canti,codMat,)
+                
+
+            cursor.execute(sql,valores)
+            cone.commit()
+            print(cursor.rowcount, "registro ingresado")
+            
+        except mysql.connector.Error as error:
+            print("Error de ingreso de datos {}".format(error))
+
+
+
     def busca_producto(nombre_producto):
         
         try:
