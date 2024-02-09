@@ -226,11 +226,7 @@ def retirarLaCantidad():
             actualizarTreeView()
             
             #Limpiamos los campos
-            canti.delete(0,END)
-            codMat.delete(0,END)
-            reser.delete(0,END)
-            sipro1.delete(0,END)
-            fren.delete(0,END)
+            
             
         except ValueError as error:
             print("Error al ingresar los datos {}".format(error))
