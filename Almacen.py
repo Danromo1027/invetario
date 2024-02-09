@@ -1,6 +1,7 @@
 from Conexion import *
+from tkinter import messagebox
 
-#hola emerson
+
 class Alma:
     
     def mostrar_productos():
@@ -66,27 +67,22 @@ class Alma:
                 cursor.execute(sql2, valor_1)
 
                 cantidadIng_1 = cursor.fetchone() 
-                print(cantidadIng_1)
                 
-                if cantidadIng_1[0] >= int(canti):
-                    sql = "Update usuarios SET Ing1 = Ing1 - %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
-                    valores = (canti,codMat,)
+                if int(canti) <= cantidadIng_1[0]:
+                    resultado = cantidadIng_1[0] - int(canti)
+                
+                    if resultado >= 0:
+                        sql = "Update usuarios SET Ing1 = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
+                        valores = (resultado, codMat,)
+                        x=1
+                        cursor.execute(sql, valores)
+                        return x
+                        print("Actualización realizada con éxito")
                 else:
-                    print("no hay cantidades suficientes para este material")    
-                
-            if fren =="Ingeniero 2":
-                sql = "Update usuarios SET Ing2 = Ing2 - %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
-                valores = (canti,codMat,)
-                
-            if fren =="Ingeniero 3":
-                sql = "Update usuarios SET Ing3 = Ing3 - %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
-                valores = (canti,codMat,)
-                
-            if fren =="Almacen":
-                sql = "Update usuarios SET Almacen = Almacen - %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
-                valores = (canti,codMat,)
-
-            cursor.execute(sql,valores)
+                    x = 2
+                    print("La cantidad ingresada es mayor a la cantidad disponible en almacen")
+                    return x
+                    
             cone.commit()
             cone.close()
             print(cursor.rowcount, "registro ingresado")

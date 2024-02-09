@@ -219,9 +219,10 @@ def retirarLaCantidad():
             fren = Asigna.get()
             fren = str(fren)
             
-            Alma.RetirarCantidad(fren,canti,codMat)
-            
-            messagebox.showinfo("Informacion", "Los elementos fueron retirados")
+            Alma.RetirarCantidad(fren,canti,codMat,x)
+            nom = x
+            if  x = 1:
+                messagebox.showinfo("Informacion", "Los elementos fueron retirados")
 
             actualizarTreeView()
             
