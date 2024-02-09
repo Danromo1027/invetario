@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from time import strftime
+from Excel import *
 import pandas as pd
 
 from Conexion import *
@@ -180,11 +181,16 @@ def agregarCantidad():
             canti = cantidad.get()
             fren = Asigna.get()
             fren = str(fren)
+            i = 0
+            
+            for i in canti:
+                b = i + canti
             
             Alma.ingresarCantidad(fren,canti,codMat)
             messagebox.showinfo("Informacion", "Los datos fueron guardados")
 
             actualizarTreeView()
+            
             
             #Limpiamos los campos
             canti.delete(0,END)
