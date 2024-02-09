@@ -1,6 +1,6 @@
 from Conexion import *
 
-#hola emerson
+#hola jimmy s ay
 class Alma:
     
     def mostrar_productos():
