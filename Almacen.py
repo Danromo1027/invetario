@@ -60,10 +60,10 @@ class Alma:
             cursor = cone.cursor()
             
             if fren == "Ingeniero 1":
-                sql2 = "SELECT * FROM usuarios WHERE Ing1 >= (canti = %s)"
-                cursor.execute(sql2,codMat,)
+                sql2 = "SELECT Ing1 FROM usuarios WHERE Codigo_Mat = %s"
+                cursor.execute(sql2, (codMat,))
 
-                cantidadIng_1 = cursor.fetchall() 
+                cantidadIng_1 = cursor.fetchone() 
 
                 if cantidadIng_1 > canti:
                     sql = "Update usuarios SET Ing1 = Ing1 - %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
