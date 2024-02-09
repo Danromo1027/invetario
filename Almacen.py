@@ -60,8 +60,16 @@ class Alma:
             cursor = cone.cursor()
             
             if fren == "Ingeniero 1":
-                sql = "Update usuarios SET Ing1 = Ing1 - %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
-                valores = (canti,codMat,)
+                sql2 = "SELECT Ing1 FROM usuarios WHERE Codigo_Mat = %s"
+                cursor.execute(sql, (codigo_mat,))
+
+                cantidadIng_1 = cursor.fetchone() 
+
+                if cantidadIng_1 > canti:
+                    sql = "Update usuarios SET Ing1 = Ing1 - %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
+                    valores = (canti,codMat,)
+                else:
+                    print("no hay cantidades suficientes para este material")    
                 
             if fren =="Ingeniero 2":
                 sql = "Update usuarios SET Ing2 = Ing2 - %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
@@ -77,6 +85,7 @@ class Alma:
                 
 
             cursor.execute(sql,valores)
+            
             cone.commit()
             print(cursor.rowcount, "registro ingresado")
             
