@@ -78,7 +78,10 @@ def Formulario():
         Asigna.grid(row=6,column=1,padx=5,pady=5)
         AsignarMateriales.set("Asigne mat. a una persona")
         
-        Button(frame1, text="Agregar",width=15, command = agregarCantidad).grid(row=7,columnspan=2)
+        Button(frame1, text="Agregar",width=15, command = agregarCantidad).grid(row=7,column=1)
+        Button(frame1, text="Retirar",width=15, command = retirarLaCantidad).grid(row=7,column=2)
+        
+        
         
         #TABLA DE DATOS
         tree = ttk.Treeview(frame2,columns=("CODIGO MATERIAL","MATERIAL - DESCRIPCION","GRUPO","INGENIERO 1",
@@ -183,6 +186,7 @@ def agregarCantidad():
             fren = str(fren)
             
             Alma.ingresarCantidad(fren,canti,codMat)
+            
             messagebox.showinfo("Informacion", "Los datos fueron guardados")
 
             actualizarTreeView()
@@ -197,5 +201,39 @@ def agregarCantidad():
             
         except ValueError as error:
             print("Error al ingresar los datos {}".format(error))
+
+def retirarLaCantidad():
+        
+        global tree,refrescar,Cod1,reserva,sipro,cantidad,Asigna,fren,reser,codMat,sipro1,canti,f1,f2,f3,f4
+        
+        try:
+            if Cod1 is None or reserva is None or Asigna is None or cantidad is None or sipro is None:
+                print("Los widgets no estan inicializados")
+                return
+            
+            codMat = Cod1.get()
+            reser = reserva.get()
+            sipro1 = sipro.get()
+            canti = cantidad.get()
+            fren = Asigna.get()
+            fren = str(fren)
+            
+            Alma.RetirarCantidad(fren,canti,codMat)
+            
+            messagebox.showinfo("Informacion", "Los elementos fueron retirados")
+
+            actualizarTreeView()
+            
+            
+            #Limpiamos los campos
+            canti.delete(0,END)
+            codMat.delete(0,END)
+            reser.delete(0,END)
+            sipro1.delete(0,END)
+            fren.delete(0,END)
+            
+        except ValueError as error:
+            print("Error al ingresar los datos {}".format(error))
+
 
 Formulario()

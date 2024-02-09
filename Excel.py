@@ -8,8 +8,9 @@ class Formato:
         
         cone = Conexion.ConexionBaseDatos()
         query = "SELECT * FROM usuario;"
-        df = pd.read_sql(query, cone)
-        df.to_excel('C:\Documentos\PROYECTOS DE PROGRAMACION\Forma.xlsx', index=False)
+        df = pd.read_sql(cone,query)
+        fri = pd.DataFrame(df)
+        fri.to_CSV('C:/Documentos/PROYECTOS DE PROGRAMACION/Forma.csv')
         cone.commit()
         cone.close()
         
