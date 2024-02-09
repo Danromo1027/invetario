@@ -67,7 +67,7 @@ class Alma:
 
                 cantidadIng_1 = cursor.fetchone() 
 
-                if cantidadIng_1 > canti:
+                if cantidadIng_1[0] > int(canti):
                     sql = "Update usuarios SET Ing1 = Ing1 - %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
                     valores = (canti,codMat,)
                 else:
