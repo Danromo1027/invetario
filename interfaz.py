@@ -194,11 +194,7 @@ def agregarCantidad():
             
             
             #Limpiamos los campos
-            canti.delete(0,END)
-            codMat.delete(0,END)
-            reser.delete(0,END)
-            sipro1.delete(0,END)
-            fren.delete(0,END)
+            
             
         except ValueError as error:
             print("Error al ingresar los datos {}".format(error))
@@ -219,10 +215,11 @@ def retirarLaCantidad():
             fren = Asigna.get()
             fren = str(fren)
             
-            Alma.RetirarCantidad(fren,canti,codMat,x)
-            nom = x
-            if  x = 1:
+            nutr = Alma.RetirarCantidad(fren,canti,codMat)
+            if nutr == 1:
                 messagebox.showinfo("Informacion", "Los elementos fueron retirados")
+            else:
+                messagebox.showinfo("Informacion", "La cantidad a retirar supera el stock")
 
             actualizarTreeView()
             

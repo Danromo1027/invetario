@@ -2,10 +2,6 @@ from Conexion import *
 from tkinter import messagebox
 
 
-<<<<<<< HEAD
-=======
-#hola jimmy s ay
->>>>>>> c097d0180769bbf68ef87f1b81cf49d1f19b433f
 class Alma:
     
     def mostrar_productos():
@@ -61,34 +57,102 @@ class Alma:
         
         try:
             
-            cone = Conexion.ConexionBaseDatos()
-            cursor = cone.cursor()
+            con = Conexion.ConexionBaseDatos()
+            cursor = con.cursor()
             
             if fren == "Ingeniero 1":
-                sql2 = "SELECT Ing1 FROM usuarios WHERE Codigo_Mat = %s"
+                sql = "SELECT Ing1 FROM usuarios WHERE Codigo_Mat = %s"
                 valor_1 = (codMat,)
 
-                cursor.execute(sql2, valor_1)
+                cursor.execute(sql, valor_1)
 
                 cantidadIng_1 = cursor.fetchone() 
                 
                 if int(canti) <= cantidadIng_1[0]:
                     resultado = cantidadIng_1[0] - int(canti)
+                    
+                    if resultado >= 0:
+                        sql = "Update usuarios SET Ing1 =  %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
+                        
+                        cursor.execute(sql, (int(resultado), codMat,))
+                        print(resultado)
+                        print(cursor.fetchall())
+                        x=1
+                        print("Actualización realizada con éxito")
+                        con.commit()
+                else:
+                    x = 2
+                    print("La cantidad ingresada es mayor a la cantidad disponible en almacen") 
+            
+            if fren == "Ingeniero 2":
+                sql = "SELECT Ing2 FROM usuarios WHERE Codigo_Mat = %s"
+                valor_1 = (codMat,)
+
+                cursor.execute(sql, valor_1)
+
+                cantidadIng_2 = cursor.fetchone() 
+                
+                if int(canti) <= cantidadIng_2[0]:
+                    resultado = cantidadIng_2[0] - int(canti)
                 
                     if resultado >= 0:
-                        sql = "Update usuarios SET Ing1 = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
+                        sql = "Update usuarios SET Ing2 = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
                         valores = (resultado, codMat,)
-                        x=1
                         cursor.execute(sql, valores)
-                        return x
+                        x=1
                         print("Actualización realizada con éxito")
+                        con.commit()
                 else:
                     x = 2
                     print("La cantidad ingresada es mayor a la cantidad disponible en almacen")
-                    return x
+            
+            if fren == "Ingeniero 3":
+                sql2 = "SELECT Ing1 FROM usuarios WHERE Codigo_Mat = %s"
+                valor_1 = (codMat,)
+
+                cursor.execute(sql2, valor_1)
+
+                cantidadIng_3 = cursor.fetchone() 
+                
+                if int(canti) <= cantidadIng_3[0]:
+                    resultado = cantidadIng_3[0] - int(canti)
+                
+                    if resultado >= 0:
+                        sql = "Update usuarios SET Ing3 = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
+                        valores = (resultado, codMat,)
+                        cursor.execute(sql, valores)
+                        x=1
+                        print("Actualización realizada con éxito")
+                        con.commit()
+                else:
+                    x = 2
+                    print("La cantidad ingresada es mayor a la cantidad disponible en almacen")
+            
+            if fren == "Almacen":
+                sql = "SELECT Almacen FROM usuarios WHERE Codigo_Mat = %s"
+                valor_1 = (codMat,)
+
+                cursor.execute(sql2, valor_1)
+
+                cantidadIng_4 = cursor.fetchone() 
+                
+                if int(canti) <= cantidadIng_4[0]:
+                    resultado = cantidadIng_4[0] - int(canti)
+                
+                    if resultado >= 0:
+                        sql = "Update usuarios SET Almacen = %s, Total = Ing1 + Ing2 + Ing3 + Almacen WHERE Codigo_Mat = %s"
+                        valores = (resultado, codMat,)
+                        cursor.execute(sql, valores)
+                        x=1
+                        print("Actualización realizada con éxito")
+                        con.commit()
+                else:
+                    x = 2
+                    print("La cantidad ingresada es mayor a la cantidad disponible en almacen")
                     
-            cone.commit()
-            cone.close()
+            return x        
+            con.commit()
+            con.close()
             print(cursor.rowcount, "registro ingresado")
             
         except mysql.connector.Error as error:
