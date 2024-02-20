@@ -1,13 +1,12 @@
 from Conexion import *
 from tkinter import messagebox
 
-
 class Alma:
     
     def mostrar_productos():
-        
+
             try:
-                
+
                 cone = Conexion.ConexionBaseDatos()
                 if cone is None:
                     return []
@@ -157,8 +156,6 @@ class Alma:
             
         except mysql.connector.Error as error:
             print("Error de ingreso de datos {}".format(error))
-
-
 
     def busca_producto(nombre_producto):
         

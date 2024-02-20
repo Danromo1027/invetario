@@ -35,14 +35,24 @@ def Formulario():
         
     try:
         
-        ventana = Tk()
+        ventana = tk.Tk()
         ventana.geometry("1200x800")
         ventana.title("REGISTRO DE ALMACEN")
-            
-        frame1 = LabelFrame(ventana,text="Inventario - Almacen",padx=10,pady=10)
+        
+        # Crear el widget Notebook
+        notebook = ttk.Notebook(ventana)
+
+        # Crear pestañas
+        pestana1 = ttk.Frame(notebook)
+        pestana2 = ttk.Frame(notebook)
+        
+        notebook.add(pestana1, text="Pestaña 1")
+        notebook.add(pestana2, text="Pestaña 2")    
+        
+        frame1 = LabelFrame(pestana1,text="Inventario - Almacen",padx=10,pady=10)
         frame1.pack(side="left", anchor='n',padx=10, pady=10, fill='both', expand=True)
         frame1.config(width=5,height=5)
-        frame2 = LabelFrame(ventana,text="TABLA",padx=10,pady=10)
+        frame2 = LabelFrame(pestana1,text="TABLA",padx=10,pady=10)
         frame2.pack(side=RIGHT, anchor='n', fill='both', expand=True,padx=10,pady=10)
         frame2.config(width=5, height=10)
         
@@ -117,6 +127,7 @@ def Formulario():
         
         Button(frame2, text="Inventario", command=funcionInventario,width=15).grid(row=0,column=0,pady=5)
         
+        notebook.pack(padx=10, pady=10, fill='both', expand=True)
         
         ventana.mainloop()
         
@@ -125,7 +136,9 @@ def Formulario():
 
 def buscar_nombre():
         global nombre_producto, nombre_buscado,buscarCod,tree,dato,refrescar,Cod1,reserva,sipro,cantidad
+        
         try:
+            
             if not buscarCod.get():
                 nombre_producto = " "
                 nombre_producto = str(nombre_producto)
@@ -148,6 +161,7 @@ def buscar_nombre():
             print("Error al buscarCod, error: {}".format(error))
 
 def mostrar_todo():
+    
     global nombre_producto, nombre_buscado,buscarCod,tree,refrescar,Cod1,reserva,sipro,cantidad,Asigna,asigna,reser,canti,codMat,sipro1
     
     tree.delete(*tree.get_children())
@@ -158,9 +172,11 @@ def mostrar_todo():
         tree.insert('',i, text = registro[i][1:2], values=registro[i][0:9])
 
 def actualizarTreeView():
+    
     global tree,datos,refrescar,Cod1,reserva,sipro,cantidad,asigna,reser,codMat,sipro1
     
     try:
+        
         tree.delete(*tree.get_children())
         datos = Alma.mostrar_productos()
             
@@ -238,7 +254,6 @@ def funcionInventario():
     for dato in registro:
         i= i+1                       
         tree.insert('',i, text = registro[i][1:2], values=registro[i][0:9])
-        
-    
+
 
 Formulario()
